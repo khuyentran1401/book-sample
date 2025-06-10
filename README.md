@@ -46,15 +46,9 @@ To contribute to the book, you can follow the steps below:
 
 1. Set up the environment by following the [Setting Up Your Environment](#setting-up-your-environment) section.
 
-2. Create and switch to a new branch:
+2. Edit the chapter in [chapters/version_control.qmd](chapters/version_control.qmd) using your favorite text editor. Please refer to the [Quarto Markdown Basics Guide](https://quarto.org/docs/authoring/markdown-basics.html) to learn how to write Quarto markdown.
 
-   ```bash
-   git checkout -b your-branch-name
-   ```
-
-3. Edit the chapter in [chapters/version_control.qmd](chapters/version_control.qmd) using your favorite text editor. Please refer to the [Quarto Markdown Basics Guide](https://quarto.org/docs/authoring/markdown-basics.html) to learn how to write Quarto markdown.
-
-4. Preview the book in your browser:
+3. Preview the book in your browser:
 
    ```bash
    cd chapters
@@ -92,7 +86,7 @@ To contribute to the book, you can follow the steps below:
    git commit -m "Your commit message"
 
    # Push your changes to the remote repository
-   git push origin your-branch-name
+   git push origin main
    ```
 
 7. View [this guide](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) to create a pull request.
