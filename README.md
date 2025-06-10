@@ -95,11 +95,4 @@ To contribute to the book, you can follow the steps below:
    git push origin your-branch-name
    ```
 
-7. Create a Pull Request (PR):
-
-   - Go to the repository on GitHub
-   - Click on "Pull requests"
-   - Click on "New pull request"
-   - Select your branch as the compare branch
-   - Fill in the PR title and description, explaining your changes
-   - Click "Create pull request"
+7. View [this guide](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) to create a pull request.
