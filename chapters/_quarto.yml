@@ -1,0 +1,42 @@
+project:
+  type: book
+
+book:
+  title: "Production Ready Data Science: From Prototyping to Production with Python"
+  author: "Khuyen Tran"
+  date: "10/7/2024"
+  chapters:
+    - index.qmd
+    - version_control.qmd
+
+format:
+  html:
+    mermaid:
+      theme: default
+
+  pdf:
+    monofont: "DejaVu Sans Mono"
+    include-in-header:
+       text: |
+         \usepackage{fvextra}
+         \usepackage[cc]{titlepic}
+         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+         \AtBeginDocument{\floatplacement{codelisting}{H}}
+    include-before-body:
+      text: |
+        \RecustomVerbatimEnvironment{verbatim}{Verbatim}{
+          showspaces = false,
+          showtabs = false,
+          breaksymbolleft={},
+          breaklines
+        }
+    fig-pos: "H"
+
+crossref:
+    lst-prefix: Example
+    lst-title: Example
+ 
+execute: 
+  error: true
+
+jupyter: python3

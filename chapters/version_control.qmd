@@ -1,0 +1,1062 @@
+# Version Control
+
+## What Is Version Control?
+
+Version control is a system that tracks changes to files and enables collaboration among developers. It allows teams to manage their codebase efficiently, revert changes when needed, and experiment safely.
+
+## Why Is Version Control Essential?
+
+Version control is especially important in a data science project for several key reasons.
+
+### Track Changes and Revert Easily
+
+#### Without Version Control
+
+You're working on a machine-learning model for customer churn prediction. After making significant changes to your `model.py` file, you realize the model's performance has decreased.
+
+Without version control, you can't easily revert to the previous working version. You spend hours manually trying to undo changes, potentially introducing new errors in the process.
+
+#### With Version Control
+
+With version control, you make regular commits as you develop your machine-learning model. If performance drops, you can review the commit history, quickly spot the problematic change, and revert to the previous state, as shown in @fig-track.
+
+
+```{mermaid}
+%%| label: fig-track
+%%| fig-cap: Version control workflow for machine learning model development
+
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#FFFFFF',
+    'git0': '#72FCDB',
+    'git1': '#72BEFA',
+    'git2': '#E583B6',
+    'gitBranchLabel0': '#000000',
+    'gitBranchLabel1': '#000000',
+    'gitBranchLabel2': '#000000',
+    'tagLabelColor': '#000000',
+    'tagLabelBackground': '#FFFFFF',
+    'tagLabelBorder': '#000000',
+    'commitLabelColor': '#000000',
+    'commitLabelBackground': '#FFFFFF',
+    'commitLabelBorder': '#000000',
+    'commitLabelFontSize': '14px',
+    'commitLabelFont': 'Arial, sans-serif'
+  }
+}}%%
+
+gitGraph
+    commit id: "Initial ML model"
+    commit id: "Hyperparameter tuning"
+    commit id: "Performance drop"
+    commit id: "Revert Performance drop" type: REVERSE
+    commit id: "Continue development"
+```
+
+This saves time and maintains a clear project evolution record.
+
+### Collaborate Effectively
+
+#### Without Version Control
+
+You're working on a data analysis project with several team members. Each person saves their work on their local machine or a shared drive.
+
+When you need to combine everyone's work, you struggle with conflicting file versions and overwritten changes. You spend hours manually merging different versions of the code, trying to reconcile discrepancies and ensure nothing is lost. This process is frustrating and error-prone.
+
+#### With Version Control
+
+With version control, your team can use a shared repository to collaborate on the data analysis project. Each member can work on their own branch, making changes without affecting the main codebase.
+
+Version control shows who made changes and when. When ready, you can merge your changes back into the `main` branch, as illustrated in @fig-track-merge.
+
+```{mermaid}
+%%| label: fig-track-merge
+%%| fig-cap: Branching and merging workflow in version control
+
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#FFFFFF',
+    'git0': '#72FCDB',
+    'git1': '#72BEFA',
+    'git2': '#E583B6',
+    'gitBranchLabel0': '#000000',
+    'gitBranchLabel1': '#000000',
+    'gitBranchLabel2': '#000000',
+    'tagLabelColor': '#000000',
+    'tagLabelBackground': '#FFFFFF',
+    'tagLabelBorder': '#000000',
+    'commitLabelColor': '#000000',
+    'commitLabelBackground': '#FFFFFF',
+    'commitLabelBorder': '#000000',
+    'commitLabelFontSize': '14px',
+    'commitLabelFont': 'Arial, sans-serif'
+  }
+}}%%
+
+gitGraph
+    commit id: "Initial setup"
+    branch feature-A
+    branch feature-B
+    checkout feature-A
+    commit id: "Alice, 2023-06-01"
+    checkout feature-B
+    commit id: "Bob, 2023-06-02"
+    checkout main
+    merge feature-A id: "Merge feature A"
+    checkout feature-B
+    commit id: "Bob, 2023-06-05"
+    checkout main
+    merge feature-B id: "Merge feature B"
+    commit id: "Final state"
+```
+
+This allows easy project history tracking, reverting issues, and maintaining an organized codebase.
+
+
+### Reproduce Results Reliably
+
+#### Without Version Control
+
+You've found a groundbreaking machine learning model, but six months later, you need to reproduce the results for a follow-up study.
+
+Without version control, you struggle to remember which version of your code produced the published results. You find multiple copies of scripts with slight variations, unsure which one is the correct version.
+
+This uncertainty makes it difficult to replicate your work accurately, potentially compromising the integrity of your research.
+
+#### With Version Control
+
+With version control, you tag the specific version of your code used for the published results. Six months later, when you need to reproduce the analysis, you simply checkout the tagged version, as illustrated in @fig-reproduce.
+
+
+```{mermaid}
+%%| label: fig-reproduce
+%%| fig-cap: Reproducing analysis using a tagged version of code
+
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#FFFFFF',
+    'git0': '#72FCDB',
+    'git1': '#72BEFA',
+    'git2': '#E583B6',
+    'gitBranchLabel0': '#000000',
+    'gitBranchLabel1': '#000000',
+    'gitBranchLabel2': '#000000',
+    'tagLabelColor': '#000000',
+    'tagLabelBackground': '#FFFFFF',
+    'tagLabelBorder': '#000000',
+    'commitLabelColor': '#000000',
+    'commitLabelBackground': '#FFFFFF',
+    'commitLabelBorder': '#000000',
+    'commitLabelFontSize': '14px',
+    'commitLabelFont': 'Arial, sans-serif'
+  }
+}}%%
+
+gitGraph
+    commit id: "Initial setup"
+    commit id: "Data preprocessing"
+    commit id: "Implement model"
+    commit id: "Innovative model" tag: "v1.0-model"
+    branch reproduction
+    checkout reproduction
+    commit id: "Checkout v1.0 for reproduction" type: REVERSE
+    checkout main
+    commit id: "Update model"
+```
+
+This ensures you're working with the exact code that generated the original results.
+
+### Experiment Safely
+
+#### Without Version Control
+
+You're working on improving a critical data pipeline that processes customer data daily. You have an idea for an optimization but aren't sure if it will work.
+
+Without version control, you make changes directly to the production code. Your experiment fails, causing the pipeline to break and disrupt the daily data flow. You scramble to remember the exact changes you made and how to revert them, causing stress and potential data loss.
+
+
+#### With Version Control
+
+With version control, you create a new branch called `feature/new-processing`. On this branch, you freely experiment with your new ideas. Your changes don't affect the main production code.
+
+If your experiments are successful, you create a pull request to merge your changes into the `main` branch, as illustrated in @fig-success.
+
+If not, you can simply discard the experimental branch without affecting the production code, as shown in @fig-failed.
+
+This approach allows you to innovate without fear of breaking the existing system.
+
+```{mermaid}
+%%| label: fig-success
+%%| fig-cap: Successful experimental branch merge
+
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#FFFFFF',
+    'git0': '#72FCDB',
+    'git1': '#72BEFA',
+    'git2': '#E583B6',
+    'gitBranchLabel0': '#000000',
+    'gitBranchLabel1': '#000000',
+    'gitBranchLabel2': '#000000',
+    'tagLabelColor': '#000000',
+    'tagLabelBackground': '#FFFFFF',
+    'tagLabelBorder': '#000000',
+    'commitLabelColor': '#000000',
+    'commitLabelBackground': '#FFFFFF',
+    'commitLabelBorder': '#000000',
+    'commitLabelFontSize': '14px',
+    'commitLabelFont': 'Arial, sans-serif'
+  }
+}}%%
+
+gitGraph
+   commit id: "Initial commit"
+   branch feature/new-processing
+   checkout feature/new-processing
+   commit id: "Try new approach"
+   checkout main
+   commit id: "Update main"
+   checkout feature/new-processing
+   commit id: "Refine processing"
+   checkout main
+   merge feature/new-processing
+```
+
+```{mermaid}
+%%| label: fig-failed
+%%| fig-cap: Discarding failed experimental branch
+
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#FFFFFF',
+    'git0': '#72FCDB',
+    'git1': '#72BEFA',
+    'git2': '#E583B6',
+    'gitBranchLabel0': '#000000',
+    'gitBranchLabel1': '#000000',
+    'gitBranchLabel2': '#000000',
+    'tagLabelColor': '#000000',
+    'tagLabelBackground': '#FFFFFF',
+    'tagLabelBorder': '#000000',
+    'commitLabelColor': '#000000',
+    'commitLabelBackground': '#FFFFFF',
+    'commitLabelBorder': '#000000',
+    'commitLabelFontSize': '14px',
+    'commitLabelFont': 'Arial, sans-serif'
+  }
+}}%%
+
+gitGraph
+   commit id: "Initial commit"
+   branch feature/failed-experiment
+   checkout feature/failed-experiment
+   commit id: "Try new approach"
+   checkout main
+   commit id: "Update main"
+   checkout feature/failed-experiment
+   commit id: "Final attempt"
+   checkout main
+```
+
+
+### Backup Your Project Securely
+
+#### Without Version Control
+
+Imagine you are working on a data science project, and you've been making changes to your code and files over time. One day, your computer crashes, and you realize that you don't have a backup of your project.
+
+You've lost all your hard work, and you'll have to start from scratch. This can be a frustrating and time-consuming process, and it can set your project back significantly.
+
+#### With Version Control
+
+With version control, you can create a repository for your project, and then commit your changes to the repository regularly.
+
+If your computer crashes or you accidentally delete a file, you can simply restore the project from the repository, as illustrated in @fig-restore.
+
+```{mermaid}
+%%| label: fig-restore
+%%| fig-cap: Restoring a project from a remote repository
+
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'actorBkg': '#72BEFA',
+    'actorBorder': '#000000',
+    'actorTextColor': '#000000',
+    'actorLineColor': '#000000',
+    'signalTextColor': '#000000',
+    'loopTextColor': '#000000',
+    'noteBorderColor': '#000000',
+    'noteBkgColor': '#72FCDB',
+    'noteTextColor': '#000000',
+    'fontSize': '13px'
+  }
+}}%%
+
+sequenceDiagram
+    participant LP as Working Directory
+    participant R as Remote Repository
+
+    LP->>R: Commit changes
+    Note over R: Changes stored safely
+
+    critical Computer crashes or file deleted
+        R->>LP: Restore project
+    end
+```
+
+## Use Git for Version Control
+
+To implement effective version control and reap its benefits, developers need a robust tool. This is where [Git](https://git-scm.com/) comes into play.
+
+### Key Git Concepts
+
+Before diving into Git usage, let's understand some key terminology:
+
+- **Working Directory**: This is the directory on your computer where you're actively working on your project files.
+
+- **Local Repository**: This is a hidden `.git` folder in your working directory that contains the complete history of your project. When you commit changes, they are stored here.
+
+- **Remote Repository**: This is a version of your project hosted on a server (like GitHub or GitLab). It allows you to back up your code and collaborate with others. You can push changes to it and pull updates from it.
+
+```{mermaid}
+%%| label: fig-git-components
+%%| fig-cap: Components of Git Version Control
+
+%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '13px'}}}%%
+
+graph TD
+    subgraph "Your Computer"
+        WD[Working Directory] --> |Contains| Files[Project Files]
+        WD --> |Contains| LR[Local Repository]
+    end
+
+    subgraph "Remote Server"
+        RR[Remote Repository]
+    end
+
+    LR <--> |Sync| RR
+
+    classDef pink fill:#eb9ec6,stroke:#000,color:#000
+    classDef blue fill:#91ccfb,stroke:#000,color:#000
+    classDef green fill:#72FCDB,stroke:#000,color:#000
+
+    class WD,LR,Files,RR blue
+```
+
+Let's explore how we can effectively use it in different scenarios.
+
+### Initialize Git
+
+To initialize Git in your current project and upload your project to a remote repository, follow these steps:
+
+First, initialize a new Git repository in the project directory:
+
+1. Start by initializing a new Git repository in your working directory:
+
+   ```bash
+   git init
+   ```
+
+2. After adding the remote repository, you need to stage the changes or new files in your Git repository:
+
+   ```bash
+   # Add all changes in the current directory
+   git add .
+   ```
+
+3. Review the list of changes to be committed:
+
+   ```bash
+   git status
+   ```
+
+   ```
+   Changes to be committed:
+
+         new file:   .gitignore
+         new file:   .pre-commit-config.yaml
+         ...
+   ```
+
+4. Save the staged changes permanently in your local repository's history along with a commit message:
+
+   ```bash
+   git commit -m 'init commit'
+   ```
+
+5. Next, add a remote repository to your local Git repository. If you're using GitHub as the remote repository, [create a new repository on GitHub](https://github.com/new) and copy its URL. Then, add the URL to your local Git repository with the name `origin`:
+
+   ```bash
+   git remote add origin <repository URL>
+   ```
+
+6. Once your commits are made and stored in your local repository, you can share your changes with others by pushing them to the remote repository:
+
+   ```bash
+   # Push to the main branch on the origin repository
+   git push origin main
+   ```
+
+@fig-init illustrates this workflow.
+```{mermaid}
+%%| label: fig-init
+%%| fig-cap: Initializing a Git repository and uploading the project to a remote repository
+
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'actorBkg': '#72BEFA',
+    'actorBorder': '#000000',
+    'actorTextColor': '#000000',
+    'actorLineColor': '#000000',
+    'signalTextColor': '#000000',
+    'loopTextColor': '#000000',
+    'noteBorderColor': '#000000',
+    'noteBkgColor': '#72FCDB',
+    'noteTextColor': '#000000',
+    'fontSize': '13px'
+  }
+}}%%
+
+sequenceDiagram
+    participant WD as Working Directory
+    participant LR as Local Repository
+    participant RR as Remote Repository
+
+    WD->>LR: git init
+    Note over LR: Initialize repository
+
+    WD->>LR: git add & commit
+    Note over WD,LR: Stage and save changes
+
+    RR->>LR: git remote add
+    Note over RR,LR: Link remote repo
+
+    LR->>RR: git push
+    Note over LR,RR: Upload changes
+```
+
+
+
+
+### Contribute to an Existing Project
+
+To contribute to an existing project, follow these steps:
+
+1. Fork the repository on GitHub if you don't have write access.
+
+2. Clone the repository to your local machine.
+
+   ```bash
+   git clone <repository URL>
+   ```
+
+   This will create a new local repository and working directory with the same name as the remote repository on your machine.
+
+   For example, if you clone `https://github.com/username/data-science-project.git`, it will create a directory called `data-science-project` containing all the project files and Git history.
+
+3. To access the files, navigate to the repository directory:
+
+   ```bash
+   cd <repository-name>
+   ```
+
+4. Create and switch to a new branch in your local repository using the command:
+
+   ```bash
+   git checkout -b <branch-name>
+   ```
+
+   Creating a new branch lets you make and test changes safely, isolated from the main codebase.
+
+5. Make some changes to the new branch:
+
+   ```bash
+   # Make changes to the new branch
+   ```
+
+6. Add, commit, and push your changes:
+
+   ```bash
+   git add .
+   git commit -m 'make changes'
+   git push origin <branch-name>
+   ```
+
+6. After pushing the commit, you can create a pull request to merge your changes into the default branch. The pull request allows project maintainers to review and discuss your changes before merging them.
+
+@fig-pull-request illustrates this process.
+
+```{mermaid}
+%%| label: fig-pull-request
+%%| fig-cap: Pull request workflow
+
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'actorBkg': '#72BEFA',
+    'actorBorder': '#000000',
+    'actorTextColor': '#000000',
+    'actorLineColor': '#000000',
+    'signalTextColor': '#000000',
+    'loopTextColor': '#000000',
+    'noteBorderColor': '#000000',
+    'noteBkgColor': '#72FCDB',
+    'noteTextColor': '#000000',
+    'fontSize': '13px'
+  }
+}}%%
+
+sequenceDiagram
+    participant Branch as Feature Branch
+    participant Remote as Remote Feature Branch
+    participant Main as Default Branch
+
+    Note over Branch: Make changes
+    Branch->>Remote: Push changes
+    Remote->>Main: Review and merge changes
+```
+
+### Merge Local Changes with Remote Changes
+
+Imagine that you have created a branch called `feat-2` from the `main` branch. After making several changes to the `feat-2` branch, you discovered that the `main` branch has been updated. To merge the remote changes from the `main` branch into the local branch, follow these steps:
+
+
+1. First, ensure that your local work is saved by staging and committing your local changes to prevent losing your changes:
+
+   ```bash
+   git add .
+   git commit -m 'commit-2'
+   ```
+
+2. Next, you can pull the changes from the `main` branch on the remote repository into your local branch.
+
+   ```bash
+   git pull origin main
+   ```
+
+   This will create a new merge commit in the `feat-2` branch, combining the histories of both the `main` branch and the `feat-2` branch.
+
+@fig-merge illustrates this process.
+
+```{mermaid}
+%%| label: fig-merge
+%%| fig-cap: Merging remote changes from the `main` branch into the local `feat-2` branch
+
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'actorBkg': '#72BEFA',
+    'actorBorder': '#000000',
+    'actorTextColor': '#000000',
+    'actorLineColor': '#000000',
+    'signalTextColor': '#000000',
+    'loopTextColor': '#000000',
+    'noteBorderColor': '#000000',
+    'noteBkgColor': '#72FCDB',
+    'noteTextColor': '#000000',
+    'fontSize': '13px'
+  }
+}}%%
+
+sequenceDiagram
+    participant LR as Local Repository<br/>(feat-2 branch)
+    participant RR as Remote Repository<br/>(main branch)
+
+    RR->>LR: git pull origin main
+    Note over RR,LR: Merge changes
+```
+
+
+### Revert Back to a Specific Commit
+
+You might want to revert back a specific commit to undo the errors that you have made. To revert back to a specific commit, follow these steps:
+
+1. Start by identifying the commit hash of the specific commit you want to revert to. Run the following command to view the commit history:
+
+   ```bash
+   git log
+   ```
+
+   ```
+   commit 0b9bee172936b45c3007b6bf6fa387ac51bdeb8c
+       commit-2
+
+   commit 992601c3fb66bf1a39cec566bb88a832305d705f
+       commit-1
+   ```
+
+   This will display a list of commits along with their respective commit hashes.
+
+2. Once you've identified the commit you want to revert to, let's assume it's `commit-1`, you can use `git revert`.
+
+
+   ```bash
+   git revert 992601c3fb66bf1a39cec566bb88a832305d705f
+   ```
+
+
+@fig-revert illustrates this process.
+```{mermaid}
+%%| label: fig-revert
+%%| fig-cap: Reverting to a specific commit
+
+%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '13px'}}}%%
+
+flowchart TD
+   A1[Commit A] --> B1[Commit B]
+   B1 --> C1[Commit C]
+   C1 --> D1[Revert C]
+   style D1 fill:#72FCDB,stroke:#000,color:#000
+
+classDef default fill:#72BEFA,stroke:#000,color:#000
+```
+
+The `git revert` command creates a new commit that undoes the changes made after `commit-1`. This is a safe way to revert changes as it preserves the commit history and allows for easy identification of the reverted changes.
+
+### Reset Your Local Repository
+
+While `git revert` is a safe way to revert changes, `git reset` is a more powerful but potentially dangerous command. The key differences are:
+
+- `git revert` creates a new commit that undoes changes, preserving the commit history
+- `git reset` moves the branch pointer to a different commit, effectively rewriting history
+
+@fig-revert-reset illustrates the difference between `git revert` and `git reset`.
+```{mermaid}
+%%| label: fig-revert-reset
+%%| fig-cap: Comparison between git revert and git reset
+
+%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '13px'}}}%%
+
+flowchart TD
+    subgraph "Git Reset"
+        A2[Commit A] --> B2[Commit B]
+        B2 --> C2[Commit C]
+        C2 -.->|Reset to B| B2
+        style C2 fill:#E583B6,stroke:#000,color:#000
+    end
+    subgraph "Git Revert"
+        A1[Commit A] --> B1[Commit B]
+        B1 --> C1[Commit C]
+        C1 --> D1[Revert C]
+        style D1 fill:#72FCDB,stroke:#000,color:#000
+    end
+
+    classDef default fill:#72BEFA,stroke:#000,color:#000
+```
+
+This makes `git reset` particularly useful when you need to:
+
+- Undo changes that haven't been pushed to the remote repository
+- Start over with a clean state
+
+
+::: {.callout-warning}
+Warning: Unlike `git revert`, `git reset` rewrites commit history. Never use `git reset` on commits that have been pushed to a shared repository, as it can cause problems for other team members.
+:::
+
+#### Reset to Remote State
+
+If your local repository has diverged from the remote and you want to make it match exactly:
+
+```bash
+git fetch origin
+git reset --hard origin/main
+```
+
+This will:
+
+1. Fetch the latest state from the remote
+2. Reset your local repository to match the remote exactly
+
+::: {.callout-warning}
+Warning: This will discard all local changes and commits. Make sure to backup any important changes before resetting.
+:::
+
+
+#### Reset and Keep Changes
+
+Sometimes, you might want to undo the last commit but keep the changes in your working directory. This is useful when you:
+
+- Made a commit with the wrong message
+- Need to add more changes to the last commit
+
+To reset to the last commit, use the following command:
+
+```bash
+git reset --soft HEAD~1
+```
+
+If you want to go back to a specific commit such as `commit-1`, use the following command:
+
+```bash
+# Get the commit hash from git log
+git log
+```
+
+```
+commit 0b9bee172936b45c3007b6bf6fa387ac51bdeb8c
+    commit-2
+
+commit 992601c3fb66bf1a39cec566bb88a832305d705f
+    commit-1
+```
+
+```bash
+# Reset to commit-1
+git reset 992601c3fb66bf1a39cec566bb88a832305d705f
+```
+
+### Temporarily Save Changes with Git Stash
+
+When working with Git, you typically need to commit your changes before pulling updates from the remote repository. However, there may be times when you want to pull remote changes but aren't ready to commit your work yet.
+
+
+For example, imagine you're working on the `feat-2` branch with uncommitted changes:
+
+```bash
+git status
+```
+
+```
+On branch feat-2
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   file1.txt
+        modified:   file2.txt
+```
+
+You need to pull updates from the remote, but you're not ready to commit your changes. This is where `git stash` comes in handy.
+
+Here are the steps to use `git stash` before pulling updates then reapply the changes:
+
+1. Stash the changes to pull updates without committing:
+
+   ```bash
+   git stash
+   ```
+
+2. Now your working directory is clean:
+
+   ```bash
+   git status
+   ```
+
+   ```
+   On branch feat-2
+   nothing to commit, working tree clean
+   ```
+
+3. You can now safely pull updates:
+
+   ```bash
+   git pull origin feat-2
+   ```
+
+
+4. After pulling, you can reapply your stashed changes:
+
+   ```bash
+   git stash pop
+   ```
+
+   ```
+   On branch feat-2
+   Changes not staged for commit:
+   (use "git add <file>..." to update what will be committed)
+   (use "git restore <file>..." to discard changes in working directory)
+         modified:   file1.txt
+         modified:   file2.txt
+   Dropped refs/stash@{0} (1234abcd5678efgh)
+   ```
+
+Now you have the latest updates from the remote repository, and your local changes are back in your working directory.
+
+@fig-stash illustrates this process.
+
+
+```{mermaid}
+%%| label: fig-stash
+%%| fig-cap: Stashing and reapplying changes during a pull operation
+
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'actorBkg': '#72BEFA',
+    'actorBorder': '#000000',
+    'actorTextColor': '#000000',
+    'actorLineColor': '#000000',
+    'signalTextColor': '#000000',
+    'loopTextColor': '#000000',
+    'noteBorderColor': '#000000',
+    'noteBkgColor': '#72FCDB',
+    'noteTextColor': '#000000',
+    'fontSize': '13px'
+  }
+}}%%
+
+sequenceDiagram
+    participant WD as Working Directory
+    participant LR as Local Repository
+    participant RR as Remote Repository
+
+    Note over WD: Uncommitted changes
+    WD->>LR: git stash
+    Note over WD,LR: Save changes temporarily
+
+    RR->>LR: git pull
+    Note over LR,RR: Update local branch
+
+    LR->>WD: git stash pop
+    Note over LR,WD: Reapply stashed changes
+```
+
+
+## Best Practices in Version Control
+
+### Ignore Large and Private Files
+
+
+When developers include large datasets or confidential credentials in their Git repository, it can cause several problems:
+
+- Slow Git operations due to repository bloat
+- Security risks from exposing sensitive information
+- Difficulty sharing the repository due to its size
+- Increased storage costs
+
+Git's ignore functionality provides a solution by allowing you to specify which files should not be tracked. This helps:
+
+- Keep repositories small and efficient
+- Protect sensitive information
+- Reduce unnecessary version tracking of large binary files
+
+To specify which files and directories Git should ignore, create a `.gitignore` file in your project's root directory.
+
+```{.txt filename=".gitignore"}
+# Ignore large data files
+*.csv
+*.parquet
+*.feather
+*.h5
+
+# Ignore model files
+*.pkl
+*.joblib
+*.pt
+
+# Ignore sensitive information
+.env
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore virtual environment
+venv/
+env/
+
+# Ignore IDE files
+.vscode/
+```
+
+
+With this `.gitignore` file in place, large datasets and secret configuration files won't be tracked by Git.
+
+Find a list of useful `.gitignore` templates for your language [here](https://github.com/github/gitignore).
+
+### Commit Often and Logically
+
+When you commit multiple unrelated changes in a single large commit, it becomes challenging to:
+
+- Understand the purpose of each individual change
+- Review and verify changes effectively
+- Selectively revert specific changes if needed
+
+Instead, make smaller, more frequent commits with clear, descriptive messages. For example:
+
+```bash
+# Commit 1: Data preprocessing
+git commit -m "Add data cleaning and preprocessing steps"
+
+# Commit 2: Feature engineering
+git commit -m "Create new features for customer churn prediction"
+
+# Commit 3: Model training
+git commit -m "Train initial random forest model"
+
+# Commit 4: Model evaluation
+git commit -m "Add detailed model evaluation"
+
+# Commit 5: Model improvement
+git commit -m "Optimize model hyperparameters"
+```
+
+Each commit focuses on a specific aspect of the project, making it easier to:
+
+- Track changes and their impact
+- Review code modifications
+- Revert specific changes if needed
+- Understand the project's evolution
+
+### Write Clear Commit Messages
+
+Vague commit messages make it difficult to understand what changes were made and why. Consider this unhelpful commit message:
+
+```bash
+git commit -m "data cleaning"
+```
+
+This message provides little information about what was actually done or which dataset was affected.
+
+Instead, write commit messages that clearly describe the actions taken and the affected components:
+
+```bash
+git commit -m "Remove duplicates and nulls from customer dataset"
+```
+
+This improved commit message explicitly states:
+
+- The actions taken: removing duplicates and nulls
+- The specific dataset affected: customer dataset
+
+Writing detailed commit messages helps teammates understand changes and trace project evolution easily.
+
+### Fetch Before Merge
+
+Using `git pull` can be problematic because it automatically merges remote changes into your current branch without giving you a chance to review them first. This can lead to:
+
+- Unexpected merge conflicts
+- Unintentional code changes
+- Difficulty understanding what changes were actually incorporated from the remote repository
+
+For example, imagine you're working on the `main` branch and you want to pull changes from the remote repository:
+
+```bash
+# Potentially problematic direct pull
+git pull origin main
+```
+
+You might encounter a merge conflict:
+
+```
+Auto-merging preprocessing.py
+CONFLICT (content): Merge conflict in preprocessing.py
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+This conflict can disrupt your workflow and force you to resolve conflicts on the spot.
+
+Instead, use a two-step process with `git fetch` and `git merge`:
+
+1. Fetch the latest changes from the remote repository:
+
+   ```bash
+   git fetch origin
+   ```
+
+   This command updates your local copy of the remote branches without modifying your working directory.
+
+2. Review the changes:
+
+   ```bash
+   # Check the differences between your current branch and the remote main
+   git log ..origin/main
+   ```
+
+   ```
+   e4f5g6h Update data preprocessing script
+   d7e8f9a Add new feature extraction function
+   ```
+
+3. Once you're satisfied with the changes, merge them:
+
+   ```bash
+   git merge origin/main
+   ```
+   ```
+   Updating a1b2c3d..e4f5g6h
+   Fast-forward
+   preprocessing.py | 15 ++++++++++++---
+   feature_extraction.py | 25 +++++++++++++++++++++++++
+   2 files changed, 37 insertions(+), 3 deletions(-)
+   ```
+
+This method lets you examine incoming changes before merging. You can review new commits, check for conflicts, and decide when and how to integrate updates into your work.
+
+
+@fig-fetch demonstrates this process.
+
+```{mermaid}
+%%| label: fig-fetch
+%%| fig-cap: Fetching and merging remote changes
+
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'actorBkg': '#72BEFA',
+    'actorBorder': '#000000',
+    'actorTextColor': '#000000',
+    'actorLineColor': '#000000',
+    'signalTextColor': '#000000',
+    'loopTextColor': '#000000',
+    'noteBorderColor': '#000000',
+    'noteBkgColor': '#72FCDB',
+    'noteTextColor': '#000000'
+  }
+}}%%
+
+sequenceDiagram
+    participant WD as Working Directory
+    participant LR as Local Repository
+    participant RR as Remote Repository
+
+    RR->>LR: git fetch origin
+    Note over LR,RR: Update local copy
+
+    LR->>WD: git merge
+    Note over LR,WD: Merge remote changes
+```
+
+This approach allows you to review incoming changes, prepare your workspace, and choose the optimal time for integration.
+
+## Key Takeaways
+
+Version control is an essential tool for data scientists, enabling efficient collaboration, experimentation, and project management. Here are the key takeaways from this chapter:
+
+1. Core benefits of version control:
+   - Track changes and revert to previous versions when needed
+   - Collaborate effectively with team members
+   - Reproduce results reliably
+   - Experiment safely without affecting production code
+   - Backup your project securely
+
+2. Git fundamentals:
+   - Working Directory: Where you make changes to files
+   - Local Repository: Stores complete project history
+   - Remote Repository: Hosts code for backup and collaboration
+   - Commits: Snapshots of changes with descriptive messages
+   - Branches: Isolated environments for feature development
+
+3. Essential Git commands:
+   - `git init`: Start a new repository
+   - `git add` & `git commit`: Save changes
+   - `git push` & `git pull`: Sync with remote repository
+   - `git branch` & `git checkout`: Manage different versions
+   - `git merge`: Combine changes from different branches
+   - `git revert` & `git reset`: Undo changes when needed
+
+4. Best practices:
+   - Use `.gitignore` to exclude large files and sensitive data
+   - Make small, focused commits with clear messages
+   - Fetch before merging to review changes
+   - Create feature branches for new development
+   - Regularly sync with the remote repository
+
+By following these practices and understanding these concepts, you can effectively manage your code, collaborate with others, and maintain a clean, organized project history.
+

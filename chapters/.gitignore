@@ -1,0 +1,6 @@
+/.quarto/
+*.csv
+*.parquet
+*.db
+*copy.qmd
+*.json

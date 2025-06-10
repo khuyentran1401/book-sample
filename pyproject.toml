@@ -1,0 +1,54 @@
+[project]
+name = "software-engineering-for-data-scientists"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "quarto>=0.1.0",
+]
+
+[tool.ruff]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+# Same as Black.
+line-length = 88
+
+[tool.ruff.lint]
+ignore = ["E501", "F841", "B018", "E101", "W191"]
+select = ["B", "C", "E", "F", "W", "B9", "I", "Q"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "tab"
+skip-magic-trailing-comma = false
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
