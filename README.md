@@ -11,9 +11,14 @@ The sample chapter is written in Quarto (`.qmd`) format and is located in [chapt
 2. Clone the repository:
 
    ```bash
+   # Fork the repository
+   # 1. Go to https://github.com/khuyentran1401/book-sample
+   # 2. Click the "Fork" button in the top-right corner
+   # 3. Select your GitHub account as the destination
+
    # Clone the repository
-   git clone https://github.com/khuyentran1401/production-ready-data-science.git
-   cd production-ready-data-science
+   git clone https://github.com/khuyentran1401/book-sample.git
+   cd book-sample
    ```
 
 3. Install uv by following the instructions [here](https://docs.astral.sh/uv/getting-started/installation/).
@@ -71,14 +76,22 @@ To contribute to the book, you can follow the steps below:
    ```bash
    # Stage all changes
    git add .
-   
+
    # Or stage specific files
    git add path/to/file
-   
+
    # Commit your changes with a descriptive message
    git commit -m "Your commit message"
-   
+
    # Push your changes to the remote repository
    git push origin your-branch-name
    ```
 
+6. Create a Pull Request (PR):
+
+   - Go to the repository on GitHub
+   - Click on "Pull requests"
+   - Click on "New pull request"
+   - Select your branch as the compare branch
+   - Fill in the PR title and description, explaining your changes
+   - Click "Create pull request"
