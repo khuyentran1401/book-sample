@@ -17,7 +17,7 @@ The sample chapter is written in Quarto (`.qmd`) format and is located in [chapt
    # 3. Select your GitHub account as the destination
 
    # Clone the repository
-   git clone https://github.com/khuyentran1401/book-sample.git
+   git clone https://github.com/your-username/book-sample.git
    cd book-sample
    ```
 
