@@ -54,7 +54,7 @@ To contribute to the book, you can follow the steps below:
 
 3. Edit the chapter in [chapters/version_control.qmd](chapters/version_control.qmd) using your favorite text editor. Please refer to the [Quarto Markdown Basics Guide](https://quarto.org/docs/authoring/markdown-basics.html) to learn how to write Quarto markdown.
 
-4. Preview the book to see your changes:
+4. Preview the book in your browser:
 
    ```bash
    cd chapters
@@ -63,15 +63,23 @@ To contribute to the book, you can follow the steps below:
 
    The sample chapter will be available at [http://localhost:6289/version_control.html](http://localhost:6289/version_control.html).
 
-   You can also render the book to PDF to see your changes:
+5. Render the sample chapter to other formats:
+
+   - To PDF:
 
    ```bash
-   quarto render --to pdf
+   quarto render version_control.qmd --to pdf
    ```
 
-   The rendered PDF will be available in the `_book` directory.
+   - To docx:
 
-5. Stage, commit, and push your changes:
+   ```bash
+   quarto render version_control.qmd --to docx
+   ```
+
+   The rendered PDF and docx will be available in the `_book` directory.
+
+6. Stage, commit, and push your changes:
 
    ```bash
    # Stage all changes
@@ -87,7 +95,7 @@ To contribute to the book, you can follow the steps below:
    git push origin your-branch-name
    ```
 
-6. Create a Pull Request (PR):
+7. Create a Pull Request (PR):
 
    - Go to the repository on GitHub
    - Click on "Pull requests"
